@@ -227,48 +227,48 @@ $table-borders: #dee2e6;
 	}
 }
 
-#launchers-accordion {
-	.collapse {
-		font-family: monospace;
-		font-size: .67rem;
-		background-color: #e9ecef;
+// #launchers-accordion {
+// 	.collapse {
+// 		font-family: monospace;
+// 		font-size: .67rem;
+// 		background-color: #e9ecef;
 
-		.card-body {
-			height: calc(100vh - 204px) !important;
-			max-height: calc(100vh - 204px) !important;
-		}
-	}
-	.card-header .btn-block {
-		padding: 0.375rem 0.75rem 0.375rem calc(0.75rem + .6rem);
-	}
-}
+// 		.card-body {
+// 			height: calc(100vh - 204px) !important;
+// 			max-height: calc(100vh - 204px) !important;
+// 		}
+// 	}
+// 	.card-header .btn-block {
+// 		padding: 0.375rem 0.75rem 0.375rem calc(0.75rem + .6rem);
+// 	}
+// }
 
-#help-blocks {
-	.accordion {
-		.card {
-			margin-bottom: .25rem;
-			//&:not(:last-of-type) {
-				border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
-			//}
+// #help-blocks {
+// 	.accordion {
+// 		.card {
+// 			margin-bottom: .25rem;
+// 			//&:not(:last-of-type) {
+// 				border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+// 			//}
 
-			.card-header {
-				padding: unset;
-				background-color: $color-main;
-				button {
-					color: $white;
-				}
-			}
+// 			.card-header {
+// 				padding: unset;
+// 				background-color: $color-main;
+// 				button {
+// 					color: $white;
+// 				}
+// 			}
 
-			.card {
-				margin: .25rem;
-				border: none !important;
-				.card-header {
-					background-color: $color-light !important;
-				}
-			}
-		}
-	}
-}
+// 			.card {
+// 				margin: .25rem;
+// 				border: none !important;
+// 				.card-header {
+// 					background-color: $color-light !important;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
 //#endregion
 
 //#region ------------------- CALENDARS -------------------------------------------//
@@ -360,31 +360,31 @@ table {
 	background-color: $gray-200 !important;
 }
 
-.bg-only_text {
-	background-color: $color-only_text !important;
-	border-color: $color-only_text !important;
-}
-.bg-with_file {
-	background-color: $color-with_file !important;
-	border-color: $color-with_file !important;
-}
-.bg-other {
-	background-color: $color-other !important;
-	border-color: $color-other !important;
-}
+// .bg-only_text {
+// 	background-color: $color-only_text !important;
+// 	border-color: $color-only_text !important;
+// }
+// .bg-with_file {
+// 	background-color: $color-with_file !important;
+// 	border-color: $color-with_file !important;
+// }
+// .bg-other {
+// 	background-color: $color-other !important;
+// 	border-color: $color-other !important;
+// }
 
-.bg-CHECKIN {
-	@extend .bg-warning;
-	border-color: var(--warning);
-}
-.bg-CHECKOUT {
-	@extend .bg-success;
-	border-color: var(--success);
-}
-.bg-CANCELED {
-	@extend .bg-danger;
-	border-color: var(--danger);
-}
+// .bg-CHECKIN {
+// 	@extend .bg-warning;
+// 	border-color: var(--warning);
+// }
+// .bg-CHECKOUT {
+// 	@extend .bg-success;
+// 	border-color: var(--success);
+// }
+// .bg-CANCELED {
+// 	@extend .bg-danger;
+// 	border-color: var(--danger);
+// }
 
 .text-sm {
 	font-size: $font-size-smaller;
@@ -435,25 +435,25 @@ table {
     padding: 3px 0 3px 3px;
 }
 
-#dashboardContentsContainer, #help-blocks {
-	margin-top: 5px;
-}
+// #dashboardContentsContainer, #help-blocks {
+// 	margin-top: 5px;
+// }
 
-#dashboardContentsContainer {
-	.list-group-item {
-		padding: 0.45rem 1.25rem;
-	}
-	.chart-title {
-		color: rgba(0, 0, 0, 0.5) !important;
-	}
-}
+// #dashboardContentsContainer {
+// 	.list-group-item {
+// 		padding: 0.45rem 1.25rem;
+// 	}
+// 	.chart-title {
+// 		color: rgba(0, 0, 0, 0.5) !important;
+// 	}
+// }
 
-#jobsTable {
-	.buttons button.deleteJob {
-		margin-left: 0.15rem;
-		/* margin-right: 0.125rem; */
-	}
-}
+// #jobsTable {
+// 	.buttons button.deleteJob {
+// 		margin-left: 0.15rem;
+// 		/* margin-right: 0.125rem; */
+// 	}
+// }
 
 div.dataTables_wrapper {
 	display: block !important;
@@ -579,14 +579,14 @@ fieldset {
 	}
 }
 
-#settingTable {
-	.DTE_Inline_Field {
-		width: calc(100% - 60px);
-	}
-	.DTE_Inline_Buttons {
-		margin-top: 3px;
-	}
-}
+// #settingTable {
+// 	.DTE_Inline_Field {
+// 		width: calc(100% - 60px);
+// 	}
+// 	.DTE_Inline_Buttons {
+// 		margin-top: 3px;
+// 	}
+// }
 
 #DTE_Field_image:hover {
 	cursor: pointer;
@@ -1755,12 +1755,12 @@ main nav {
 			}
 		}
 	}
-	#impersonate-user {
-		background: white;
-		option {
-			font-size: .9em;
-		}
-	}
+	// #impersonate-user {
+	// 	background: white;
+	// 	option {
+	// 		font-size: .9em;
+	// 	}
+	// }
 }
 
 .sb-sidenav {
@@ -2020,20 +2020,20 @@ pre {
 	width: 93vw;
 }
 
-.dashboard-countdown {
-	position: absolute !important;
-	margin-top: 1px;
-	right: 30px;
-	top: unset !important;
-}
+// .dashboard-countdown {
+// 	position: absolute !important;
+// 	margin-top: 1px;
+// 	right: 30px;
+// 	top: unset !important;
+// }
 
-#bucket-filetree {
-	overflow: hidden;
+// #bucket-filetree {
+// 	overflow: hidden;
 
-	&> ul > .fancytree-lastsib:first-child > ul[role="group"] > li[role="treeitem"] {
-		border-top: 1px solid $table-borders;
-	}
-}
+// 	&> ul > .fancytree-lastsib:first-child > ul[role="group"] > li[role="treeitem"] {
+// 		border-top: 1px solid $table-borders;
+// 	}
+// }
 
 .file-input {
 	// max-height: calc(60vh - 20px);
