@@ -1,21 +1,12 @@
 'use strict';
 
-declare global {
-	interface Window {
-		//APP: any;
-		//datatablesTranslations: Object;
-		//Notify: Notifications;
-		//jQuery: JQueryStatic;
-		//$: JQueryStatic;
-		//errorMessage: string;
-	}
-	
-	type anyElement = string | HTMLElement | JQuery;
-}
-
 //import { Min, Max, IsHexColor } from "class-validator";
 const JsonViewer = require('json-viewer-js');
 require('../external/simpleXML');
+
+declare global {
+	type anyElement = string | HTMLElement | JQuery;
+}
 
 export module Utils {
 	export class DOM {
@@ -57,43 +48,26 @@ export module Utils {
 	}
 
 	export class String {
-		// public static syntaxHighlight(json: string): string {
-		// 	json = JSON.stringify(JSON.parse(json), null, 4);
-		// 	json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-		// 	return '<pre>' + json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-		// 		var cls = 'number';
-		// 		if (/^"/.test(match)) {
-		// 			cls = /:$/.test(match) ? 'key' : 'string';
-		// 		} else if (/true|false/.test(match)) {
-		// 			cls = 'boolean';
-		// 		} else if (/null/.test(match)) {
-		// 			cls = 'null';
-		// 		}
-		// 		return '<span class="' + cls + '">' + match + '</span>';
-		// 	}) + '</pre>';
-		// }
 		public static jsonHighlight(json: string|Object, container: anyElement, expand: boolean = false): void {
-			let $container = $(Utils.DOM.getDomElement(container));
-			$container.empty();
+			let $container = Utils.DOM.getDomElement(container).innerHTML = "";
+			// $container.empty();
 			let viewer = new JsonViewer({
-				container: $container[0], 
+				container: $container, 
 				data: typeof json === 'string' ? json : JSON.stringify(json), 
 				theme: 'light', 
 				expand: expand
 			});
 
-			if(!expand) $(viewer.options.container.querySelector('.jv-folder:first-child')).trigger('click');
+			if(!expand) viewer.options.container.querySelector('.jv-folder:first-child').click();
 		}
 
 		public static xmlHighlight(xml: string, container: anyElement): void {
-			let $container = $(Utils.DOM.getDomElement(container));
-			$container.empty();
-			let $parsed = (<any>$container).simpleXML({
+			let $container = Utils.DOM.getDomElement(container).innerHTML = "";
+			// $container.empty();
+			(<any>$container).simpleXML({
 				xmlString: xml,
 				collapsedText: ''
-			});
-
-			$parsed.find('.simpleXML-expander').trigger('click');
+			})[0].querySelector('.simpleXML-expander').click();
 		}
 
 		public static isEmail(email: string): boolean {
@@ -376,9 +350,14 @@ export module Utils {
 			let contentsLength = contents.length;
 			for (let i = 0; i < contentsLength; i++) {
 				//console.log($(contents[i]).text(), $(contents[i]).text().search(search) !== -1);
-				let contentsText = $(contents[i]).text();
-				if (typeof search === 'string' && contentsText.search(search) !== -1) return true;
-				if (search instanceof RegExp && contentsText.match(search)) return true;
+				let element = document.querySelector(contents[i]);
+				if(element) {
+					let contentsText = element.textContent;
+					if(contentsText) {
+						if (typeof search === 'string' && contentsText.search(search) !== -1) return true;
+						if (search instanceof RegExp && contentsText.match(search)) return true;
+					}
+				}
 			}
 
 			return false;
@@ -507,44 +486,6 @@ export module Utils {
 					throw error;
 				})/*.finally(() => { if(window.ajaxLoading) window.ajaxLoading(false); })*/;
 		}
-	
-		/* private static xmlHttpFetch(url: string, options: RequestInit = {}): Promise<Response> {
-			let xhr = new XMLHttpRequest();
-			let onFufillment = [];
-			let onError = [];
-			let onCompletion = [];
-			xhr.responseType = 'blob';
-			xhr.onreadystatechange = function () {
-				let _data = this;
-				if (this.readyState == 4 && this.status == 200) {
-					onFufillment.forEach(callback => callback(_data));
-					onCompletion.forEach(callback => callback(_data));
-				} else if (this.readyState == 4 && this.status !== 200) {
-					onError.forEach(callback => callback(_data));
-					onCompletion.forEach(callback => callback(_data));
-				}
-			};
-			xhr.open(options.method, url, true);
-			xhr.setRequestHeader('Content-Type', options.headers['Content-Type']);
-			if(options.headers['Authorization']) xhr.setRequestHeader('Authorization', options.headers['Authorization']);
-			xhr.send();
-			
-			return {
-				then: function then(fufillmentFunction) {
-					onFufillment.push(fufillmentFunction);
-					return Promise.resolve(new Response(this));
-				},
-				catch: function _catch(errorFunction) {
-					onError.push(errorFunction);
-					return Promise.reject(this);
-				},
-				finally: function _finally(completionFunction) {
-					onCompletion.push(completionFunction);
-					$('#loader-block-spinner').hide();
-					return Promise.resolve(new Response(this));
-				}
-			};
-		}*/
 	}
 }
 
