@@ -1,10 +1,23 @@
 'use strict';
 
+export interface BaseAdminJQuery {
+	swipe(options: any): any;
+}
+
+export interface BaseAdminWindow {
+	Notify: Notifications;
+	jQuery: JQueryStatic;
+	$: JQueryStatic;
+	Translator: Translator.BazingaTranslator;
+	moment: Function;
+	datatablesTranslations: Object;
+}
+
 declare global {
-	interface JQuery {
+	interface JQuery extends BaseAdminJQuery {
 		swipe(options: any): any;
 	}
-	interface Window {
+	interface Window extends BaseAdminWindow {
 		Notify: Notifications;
 		jQuery: JQueryStatic;
 		$: JQueryStatic;
