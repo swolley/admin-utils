@@ -39,7 +39,7 @@
     "@types/datatables.net-select": "^1.2.7",
     "@types/daterangepicker": "^3.1.4",
     "@types/jest": "^27.4.0",
-    "@types/jquery": "^3.5.5",
+    "@types/jquery": "^3.5.13",
     "@types/jquery.fancytree": "^0.0.7",
     "@types/jquery.pnotify": "^3.0.36",
     "@types/jqueryui": "^1.12.15",
@@ -48,8 +48,7 @@
     "core-js": "^3.0.0",
     "datatables.responsive.typings": "^1.0.3",
     "google-charts": "^2.0.0",
-    "regenerator-runtime": "^0.13.2",
-    "ts-node": "^10.5.0"
+    "regenerator-runtime": "^0.13.2"
   },
   "dependencies": {
     "@fullcalendar/bootstrap": "^4.4.2",

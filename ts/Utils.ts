@@ -316,12 +316,9 @@ export module Utils {
 	export class User {
 		public static ROLE_LEVEL = {
 			READ: 1,
-			//EDIT: 2,	-- correggere sul frontend w sostituire con WRITE
 			WRITE: 2,
-			//APPROVE: 4,
 			DELETE: 4,
-			INSERT: 8,
-			//PAY: 32
+			INSERT: 8
 		}
 
 		/**
@@ -363,20 +360,6 @@ export module Utils {
 			return false;
 		};
     }
-
-	export class Statuses {
-		public static Job = {
-			TODO: 0,
-			INIT: 1,
-			INIT_ERR: -1,
-			PROCESSED: 2,
-			PROCESSED_ERROR: -2,
-			READY: 3,
-			READY_ERR: -3,
-			SEND: 4,
-			SEND_ERR: -4
-		}
-	}
 
 	export class Network {
 		public static isOnline(): boolean {
@@ -424,8 +407,8 @@ export module Utils {
 		public static getBearerAuth(token: string) {
 			return 'Bearer ' + token;
 		}
-	
-		public static fetch(url: string, params: RequestInit = {}): Promise<Response> {
+
+		protected static mergeParams(params: RequestInit = {}): RequestInit {
 			let defaultParams = {
 				method: 'GET',
 				headers: {
@@ -434,47 +417,19 @@ export module Utils {
 				}
 			};
 			params = Objects.mergeDeep(defaultParams, params);
+			
 			if(params.body && typeof params.body !== 'string') params.body = JSON.stringify(params.body);
-			
-			//if(!url.match(/^(https?)|(ftp)/) && window.apiHost) url = window.apiHost + url;
-			// let targetUrl: URL = new URL(url);
-			// let originUrl: URL = new URL(window.location.href)
-			//params.mode = targetUrl.origin !== originUrl.origin ? 'cors' : 'no-cors';
-			
-			//if(!params.headers!['Authorization'] && window.COLLABORATORI && window.COLLABORATORI.constructor.name === 'App') {
-				//let session = window.COLLABORATORI.getSession();
-				// if(session) {
-				// 	let tokens = session.getTokens();
-				// 	if(tokens) {
-				// 		params.headers!['Authorization'] = Server.getBearerAuth(tokens.accessToken);
-				// 		//params.credentials = 'include';
-				// 	}
-				// }
-			//}
-			if(params.headers!['Authorization']) {
-				if(params.headers!['Authorization'].includes('Basic')) params.headers!["X-Requested-With"] = "XMLHttpRequest";
-				//params.credentials = 'include';
-			}
+			if(params.headers!['Authorization'] && params.headers!['Authorization'].includes('Basic')) params.headers!["X-Requested-With"] = "XMLHttpRequest";
+
+			return params;
+		}
+	
+		public static fetch(url: string, params: RequestInit = {}): Promise<Response> {
+			params = Server.mergeParams(params);
 			
 			return fetch(url, params)
 				.then(async (response: Response): Promise<any> => {
 					if(response.ok) return response.headers['Content-Type'] === 'application/json' ? response.json() : response;
-					
-					//let session = window.COLLABORATORI.getSession();
-					//if(response.status === 401 && window.COLLABORATORI && session && session.getTokens()) {
-						//tries session refresh with refreshtoken
-					// 	session.loginByToken(null, session.getTokens().refreshToken, 
-					// 		() => {
-					// 			params.headers!['Authorization'] = Server.getBearerAuth(window.COLLABORATORI.getSession().getTokens().accessToken);
-					// 			return Server.fetch(url, params);
-					// 		},
-					// 		() => {
-					// 			throw new Error("Both session's tokens expired");
-					// 		}
-					// 	);
-					// } else {
-					// 	throw new Error(response.headers['Content-Type'] && response.headers['Content-Type'] === 'application/json' ? await response.json() : await response.text());
-					// }
 				})
 				.catch(error => {
 					try {
@@ -484,8 +439,46 @@ export module Utils {
 						console.error(error.message);
 					}
 					throw error;
-				})/*.finally(() => { if(window.ajaxLoading) window.ajaxLoading(false); })*/;
+				});
 		}
+
+		/* protected static xmlHttpFetch(url: string, options: RequestInit = {}): Promise<Response> {
+			let xhr = new XMLHttpRequest();
+			let onFufillment = [];
+			let onError = [];
+			let onCompletion = [];
+			xhr.responseType = 'blob';
+			xhr.onreadystatechange = function () {
+				let _data = this;
+				if (this.readyState == 4 && this.status == 200) {
+					onFufillment.forEach(callback => callback(_data));
+					onCompletion.forEach(callback => callback(_data));
+				} else if (this.readyState == 4 && this.status !== 200) {
+					onError.forEach(callback => callback(_data));
+					onCompletion.forEach(callback => callback(_data));
+				}
+			};
+			xhr.open(options.method, url, true);
+			xhr.setRequestHeader('Content-Type', options.headers['Content-Type']);
+			if(options.headers['Authorization']) xhr.setRequestHeader('Authorization', options.headers['Authorization']);
+			xhr.send();
+			
+			return {
+				then: function then(fufillmentFunction) {
+					onFufillment.push(fufillmentFunction);
+					return Promise.resolve(new Response(this));
+				},
+				catch: function _catch(errorFunction) {
+					onError.push(errorFunction);
+					return Promise.reject(this);
+				},
+				finally: function _finally(completionFunction) {
+					onCompletion.push(completionFunction);
+					$('#loader-block-spinner').hide();
+					return Promise.resolve(new Response(this));
+				}
+			};
+		}*/
 	}
 }
 

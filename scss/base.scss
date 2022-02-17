@@ -12,6 +12,7 @@ $font-size-smallest: 0.7rem !default;
 $color-selected: #cfd4da !default;
 $color-input-borders: #ced4da !default;
 $color-editable: #e9ecef !default;
+
 //#endregion
 
 //#region ------------------- OVERRIDES ----------------------------------------- //
@@ -135,43 +136,43 @@ $table-borders: #dee2e6;
 	//padding-left: 16px !important;
 }*/
 
-.accordion {
-	//margin-bottom: 12px;
-	.card {
-		border: none;
-		.card-header {
-			@extend %bgSecondary;
-			border-bottom: 2px solid $color-white !important;
-			padding: 0;
+// .accordion {
+// 	//margin-bottom: 12px;
+// 	.card {
+// 		border: none;
+// 		.card-header {
+// 			@extend %bgSecondary;
+// 			border-bottom: 2px solid $color-white !important;
+// 			padding: 0;
 
-			button.btn-link {
-				color: $color-white !important;
-				width: 100%;
-				text-align: left;
-			}
-		}
+// 			button.btn-link {
+// 				color: $color-white !important;
+// 				width: 100%;
+// 				text-align: left;
+// 			}
+// 		}
 
-		.accordion {
-			margin-left: 1rem;
-			.card .card-header {
-				@extend %bgDefault;
-				border-bottom: 2px solid $color-white !important;
-				padding: 0;
+// 		.accordion {
+// 			margin-left: 1rem;
+// 			.card .card-header {
+// 				@extend %bgDefault;
+// 				border-bottom: 2px solid $color-white !important;
+// 				padding: 0;
 
-				button.btn-link {
-					color: $color-white !important;
-					width: 100%;
-					text-align: left;
-				}
-			}
-		}
+// 				button.btn-link {
+// 					color: $color-white !important;
+// 					width: 100%;
+// 					text-align: left;
+// 				}
+// 			}
+// 		}
 		
-		.card-body {
-			border: 1px solid $color-input-borders;
-			margin-bottom: 6px;
-		}
-	}
-}
+// 		.card-body {
+// 			border: 1px solid $color-input-borders;
+// 			margin-bottom: 6px;
+// 		}
+// 	}
+// }
 
 .action-button i {
 	color: $color-light !important;
@@ -921,16 +922,6 @@ div.selectize-dropdown {
 		}
 	}
 }
-//#endregion
-
-//#region -------------------- LOGIN ---------------------------------------------//
-body {
-	&.not-logged {
-		background-image: $background-image;
-		background-repeat: repeat;
-	}
-}
-
 //#endregion
 
 //#region ------------------ CALENDARS -------------------------------------------//

@@ -1,12 +1,16 @@
 'use strict';
 
 declare global {
+	interface JQuery {
+		swipe(options: any): any;
+	}
 	interface Window {
 		Notify: Notifications;
 		jQuery: JQueryStatic;
 		$: JQueryStatic;
 		Translator: Translator.BazingaTranslator;
-		moment: Function
+		moment: Function;
+		datatablesTranslations: Object;
 	}
 }
 
